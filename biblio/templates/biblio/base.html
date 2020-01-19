@@ -1,0 +1,26 @@
+{% load static %}
+
+<head>
+    <title>{% block title %}Akaflieg Bibliothek{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'biblio/style.css'%}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    {% block extrahead %}{% endblock %}
+</head>
+
+<body>
+    <div class="w3-container w3-teal">
+        <h1>Akaflieg Bibliothek</h1>
+    </div> 
+    <div class="w3-bar-block">
+        {% block navigation %}
+        {% endblock %}
+    </div>
+    
+    <div class="w3-main" style="margin-left:200px; height=100%">
+        {% block content %}{% endblock %}
+    </div>
+     <div class="w3-container w3-teal">
+  <h5>Footer</h5>
+  <p>Footer information goes here</p>
+</div> 
+</body>

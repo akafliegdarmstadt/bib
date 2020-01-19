@@ -1,0 +1,44 @@
+{% extends "biblio/base.html" %}
+
+{% block extrahead %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+{% if data %}
+    Akaflieg Bibliothek - Eintrag {{data.id}} 
+{% else %}
+    Akaflieg Bibliothek
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    <h2>
+    {{data.title}}
+    </h2>
+    <p> {{ data.authors|join:", "}} </p>
+
+    <ul class="w3-ul w3-card-4">
+    {% for copy  in data.copies %}
+    
+    {% if 'copy.get_copy_type_label==Pdf' %}
+    <li class="w3-bar" onclick="window.open('{{copy.file.url}}')">
+    <div class="w3-bar_item w3-hide-small" style="width:85px">
+            <i class="material-icons">cloud_download</i> 
+        </div>  
+        <div class="w3-bar-item">
+            <span class="w3-large">{{copy.file.name}}</span><br>
+            <span>{{copy.file.size}}</span>
+        </div>
+        
+    </li>
+    {% else %}
+        {{ copy.get_copy_type_label }}
+    {% endif %}
+        
+    
+    {% endfor %}
+    </ul>
+   
+{% endblock %}
