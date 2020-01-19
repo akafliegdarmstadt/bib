@@ -1,5 +1,5 @@
 """
-ASGI config for pybib project.
+ASGI config for bib project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pybib.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bib.settings')
 
 application = get_asgi_application()
