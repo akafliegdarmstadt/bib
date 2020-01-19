@@ -94,3 +94,6 @@ db.sqlite3
 # migrations
 
 *migrations*
+
+# secrets
+secrets.json
