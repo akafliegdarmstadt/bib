@@ -1,8 +1,9 @@
 {% extends "biblio/base.html" %}
 
+{% load static %}
+
 {% block extrahead %}
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
 {% endblock %}
 
 {% block title %}
@@ -21,24 +22,39 @@
 
     <ul class="w3-ul w3-card-4">
     {% for copy  in data.copies %}
-    
-    {% if 'copy.get_copy_type_label==Pdf' %}
-    <li class="w3-bar" onclick="window.open('{{copy.file.url}}')">
-    <div class="w3-bar_item w3-hide-small" style="width:85px">
-            <i class="material-icons">cloud_download</i> 
-        </div>  
-        <div class="w3-bar-item">
-            <span class="w3-large">{{copy.file.name}}</span><br>
-            <span>{{copy.file.size}}</span>
+    <li style="margin:1em">
+    {% ifequal copy.get_copy_type_label "PDF" %}
+        <a href="{{copy.file.url}}">
+        <div class="w3-panel w3-cell">
+            <i data-feather="download"></i>
         </div>
-        
-    </li>
-    {% else %}
-        {{ copy.get_copy_type_label }}
-    {% endif %}
-        
+        <div class="w3-cell">
+            <span class="w3-large">{{copy.file.name}}</span><br><span>({{copy.file.size}} byte)</span>            
+        </div>
+        </a>
+    {% endifequal %}
+    {% ifequal copy.get_copy_type_label "REAL" %}
+        <div class="w3-panel w3-cell">
+            <i data-feather="book"></i>
+        </div>
+        <div class="w3-cell">
+            {{copy.location}}
+        </div>
+    {% endifequal %}
+    {% ifequal copy.get_copy_type_label "SOFTWARE" %}
+        <div class="w3-panel w3-cell">
+            <i data-feather="disc"></i>
+        </div>
+        <div class="w3-cell">
+            {{copy.location}}
+        </div>
+    {% endifequal %}
+    </li> 
     
     {% endfor %}
     </ul>
+    <script>
+        feather.replace()
+    </script>
    
 {% endblock %}
