@@ -26,8 +26,8 @@ $( document ).ready(function() {
         data:data, //assign data to table
         layout:"fitDataStretch", //fit columns to width of table (optional)
         columns:[ //Define Table Columns
-            {title:"Titel", field:"title"},
-            {title:"Autoren", field:"authors"},
+            {title:"Titel", field:"title", headerFilter:"input", headerFilterPlaceholder:"Suche nach ..."},
+            {title:"Autoren", field:"authors", headerFilter:"input", headerFilterPlaceholder:"Autor.."},
             {title:"Jahr", field:"year"},
             {title:"Tags", field:"tags", headerSort:false}
         ],
@@ -44,7 +44,7 @@ $( document ).ready(function() {
 {% endblock %}
 
 {% block content %}
-
-<div id="entries-table"></div>
-
+<div class="w3-container">
+    <div id="entries-table"></div>
+</div>
 {% endblock %}
