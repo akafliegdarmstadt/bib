@@ -6,6 +6,14 @@
 {% endblock %}
 
 {% block content %}
+{% if not entries %}
+<div class="w3-panel w3-red">
+    <h3>
+        Keine Ergebnisse gefunden. :(
+    </h3>
+</div>
+{% else %}
+
 <table class="w3-table-all w3-hoverable">
     <tr>
         <th>Titel</th>
@@ -13,6 +21,7 @@
         <th>Jahr</th>
         <th>Tags</th>
     </tr>
+
     {% for entry in entries %}
         <div>
             <tr>
@@ -25,4 +34,5 @@
     {% endfor %}
 </div>
 
+{% endif %}
 {% endblock %}
