@@ -3,10 +3,11 @@ from django.template import loader
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.core import serializers
+from django.contrib.auth.decorators import login_required
 
 from .models import BibEntry
 
-
+@login_required
 def index(request):
     entries = BibEntry.objects.all()
     data = serializers.serialize("json", BibEntry.objects.all())
@@ -30,6 +31,7 @@ def index(request):
     }
     return render(request, 'biblio/index.html', context)
 
+@login_required
 def detail(request, entry_id):
     entry = BibEntry.objects.get(pk=entry_id)
     data = {
