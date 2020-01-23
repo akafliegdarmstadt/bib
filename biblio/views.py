@@ -10,7 +10,6 @@ from .models import BibEntry
 @login_required
 def index(request):
     entries = BibEntry.objects.all()
-    data = serializers.serialize("json", BibEntry.objects.all())
 
     data = [
         {
@@ -23,11 +22,8 @@ def index(request):
         for entry in entries
     ]
 
-    print(data)
-
     context = {
-        'entry_list': entries,
-        'data': data
+        'entries': data
     }
     return render(request, 'biblio/index.html', context)
 

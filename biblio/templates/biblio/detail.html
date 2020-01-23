@@ -21,34 +21,35 @@
     <p> {{ data.authors|join:", "}} </p>
 
     <ul class="w3-ul w3-card-4">
-    {% for copy  in data.copies %}
-    <li style="margin:1em">
-    {% ifequal copy.get_copy_type_label "PDF" %}
-        <a href="{{copy.file.url}}">
-        <div class="w3-panel w3-cell">
-            <i data-feather="download"></i>
-        </div>
-        <div class="w3-cell">
-            <span class="w3-large">{{copy.file.name}}</span><br><span>({{copy.file.size}} byte)</span>            
-        </div>
-        </a>
-    {% endifequal %}
-    {% ifequal copy.get_copy_type_label "REAL" %}
-        <div class="w3-panel w3-cell">
-            <i data-feather="book"></i>
-        </div>
-        <div class="w3-cell">
-            {{copy.location}}
-        </div>
-    {% endifequal %}
-    {% ifequal copy.get_copy_type_label "SOFTWARE" %}
-        <div class="w3-panel w3-cell">
-            <i data-feather="disc"></i>
-        </div>
-        <div class="w3-cell">
-            {{copy.location}}
-        </div>
-    {% endifequal %}
+        {% for copy  in data.copies %}
+        <li style="margin:1em">
+        {% ifequal copy.get_copy_type_label "PDF" %}
+            <a href="{{copy.file.url}}">
+                <div class="w3-panel w3-cell">
+                    <i data-feather="download"></i>
+                </div>
+                <div class="w3-cell">
+                    <span class="w3-large">{{copy.file.name}}</span><br>
+                    <span>({{copy.file.size}} byte)</span>            
+                </div>
+            </a>
+        {% endifequal %}
+        {% ifequal copy.get_copy_type_label "REAL" %}
+            <div class="w3-panel w3-cell">
+                <i data-feather="book"></i>
+            </div>
+            <div class="w3-cell">
+                {{copy.location}}
+            </div>
+        {% endifequal %}
+        {% ifequal copy.get_copy_type_label "SOFTWARE" %}
+            <div class="w3-panel w3-cell">
+                <i data-feather="disc"></i>
+            </div>
+            <div class="w3-cell">
+                {{copy.location}}
+            </div>
+        {% endifequal %}
     </li> 
     
     {% endfor %}

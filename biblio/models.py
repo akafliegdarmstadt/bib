@@ -37,7 +37,7 @@ class Copy(models.Model):
                             blank=True, null=True, upload_to='pdfs')
 
     def get_copy_type_label(self):
-        return CopyType(self.type).name.title()
+        return CopyType(self.type).name
 
     def clean(self):
         if self.type in (CopyType.REAL, CopyType.SOFTWARE):
