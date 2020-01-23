@@ -36,6 +36,9 @@ class Copy(models.Model):
     file = models.FileField(help_text="Use only if type is PDF!", 
                             blank=True, null=True, upload_to='pdfs')
 
+    def __str__(self):
+        return ", ".join(map(str, [self.copyof, self.type, self.location, self.file]))
+
     def get_copy_type_label(self):
         return CopyType(self.type).name
 
