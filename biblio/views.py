@@ -11,6 +11,9 @@ from .models import BibEntry
 def index(request):
     entries = BibEntry.objects.all()
 
+    if q := request.GET.get('q'):
+        entries = BibEntry.objects.filter(title__icontains=q)
+
     data = [
         {
             'id': entry.id,

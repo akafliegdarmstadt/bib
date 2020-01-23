@@ -9,7 +9,13 @@
 
 <body>
     <div class="w3-container w3-teal">
-        <h1>Akaflieg Bibliothek</h1>
+        <h1 class="w3-third"><a href="/" style="text-decoration:none">Akaflieg Bibliothek</a></h1>
+        <div>
+            <form class="w3-rest" style="margin-top:20px; text-align:right" action="" method="get" accept-charset="utf-8">
+                <input type="text" name="q" id="q" value="">
+                <input type="submit" value="Suchen" />
+            </form>
+        </div>
     </div> 
     <div class="w3-bar-block">
         {% block navigation %}
