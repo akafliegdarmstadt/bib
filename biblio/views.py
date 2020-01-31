@@ -10,8 +10,8 @@ from .models import BibEntry
 @login_required
 def index(request):
     entries = BibEntry.objects.all()
-
-    if q := request.GET.get('q'):
+    q = request.GET.get('q')
+    if q:
         entries = BibEntry.objects.filter(title__icontains=q)
 
     data = [

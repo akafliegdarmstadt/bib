@@ -25,12 +25,12 @@ if os.path.exists('secrets.json'):
     with open('secrets.json', 'r') as f:
         SECRET_KEY = json.load(f)['DJANGO_SECRET_KEY']
 else:
-    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+    SECRET_KEY = 'Av9shaeTh1uf7uBubae5iquooWai7iethoXaithoosoob2uungaiyaodain1dua0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bib.akaflieg.tu-darmstadt.de']
 
 
 # Application definition
@@ -130,3 +130,4 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATIC_ROOT = '/var/www/bib/biblio/static'
