@@ -15,6 +15,21 @@ class IndexView(ListView, LoginRequiredMixin):
     model = BibEntry
     paginate_by = 5
 
+    def get_queryset(self):
+        search_val = self.request.GET.get('search')
+        if search_val:
+            new_context = BibEntry.objects.filter(
+                title__icontains=search_val
+            )
+        else:
+            new_context = BibEntry.objects.all()
+
+        return new_context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('search')
+        return context
 
 @login_required
 def detail(request, entry_id):

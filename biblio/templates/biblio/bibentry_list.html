@@ -24,16 +24,14 @@
     </tr>
 
     {% for entry in page_obj %}
-        <div>
-            <tr>
-                <td><a href="/{{ entry.id }}">{{ entry.title }}</a></td>
-                <td>{{ entry.authors.all|join:", " }}</td>
-                <td>{{ entry.year }}</td>
-                <td>{{ entry.tags.all|join:", " }}</td>
-            </tr>
-        </div>
+        <tr>
+            <td><a href="/{{ entry.id }}">{{ entry.title }}</a></td>
+            <td>{{ entry.authors.all|join:", " }}</td>
+            <td>{{ entry.year }}</td>
+            <td>{{ entry.tags.all|join:", " }}</td>
+        </tr>
     {% endfor %}
-</div>
+</table>
 <div class="w3-container w3-center">
     <span class="step-links">
         {% if page_obj.has_previous %}

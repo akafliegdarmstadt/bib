@@ -12,7 +12,7 @@
         <h1 class="w3-twothird"><a href="/" style="text-decoration:none">Akaflieg Bibliothek</a></h1>
         <div class="w3-rest w3-container w3-round">
             <form style="margin-top:20px; text-align:right" action="" method="get" accept-charset="utf-8">
-                <input class="w3-input" placeholder="Suchen..." type="text" name="q" id="q" value="">
+                <input class="w3-input" placeholder="Suchen..." type="text" name="search" id="search" value="{{ search|default:"" }}">
             </form>
         </div>
     </div> 
@@ -22,11 +22,10 @@
     </div>
     
     <div class="w3-container">
-        <div class="w3-container">
         {% block content %}{% endblock %}
-        </div>
     </div>
 
     <div class="w3-container w3-theme">
+
     </div> 
 </body>
