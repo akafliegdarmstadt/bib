@@ -1,0 +1,56 @@
+{% extends "biblio/base.html" %}
+
+{% load static %}
+
+{% block extrahead %}
+{% endblock %}
+
+{% block content %}
+{% if not page_obj %}
+<div class="w3-panel w3-red">
+    <h3>
+        Keine Ergebnisse gefunden. :(
+    </h3>
+</div>
+{% else %}
+
+
+<table class="w3-table-all w3-hoverable">
+    <tr>
+        <th>Titel</th>
+        <th>Autoren</th>
+        <th>Jahr</th>
+        <th>Tags</th>
+    </tr>
+
+    {% for entry in page_obj %}
+        <div>
+            <tr>
+                <td><a href="/{{ entry.id }}">{{ entry.title }}</a></td>
+                <td>{{ entry.authors.all|join:", " }}</td>
+                <td>{{ entry.year }}</td>
+                <td>{{ entry.tags.all|join:", " }}</td>
+            </tr>
+        </div>
+    {% endfor %}
+</div>
+<div class="w3-container w3-center">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endif %}
+{% endblock %}
