@@ -46,8 +46,8 @@ class Copy(models.Model):
         if self.type in (CopyType.REAL, CopyType.SOFTWARE):
             if self.location=='' or self.location is None:
                 raise ValidationError('Location muss definiert sein für diesen Typ!')
-            if self.file is not None:
-                raise ValidationError('Eine Datei darf für diesen Medientyp nicht angegeben werden!')
+            if self.file is not None and self.file != "":
+                raise ValidationError(f'Eine Datei darf für diesen Medientyp nicht angegeben werden! {self.file}!')
         # if type is file, file field is mandatory
         if self.type==CopyType.PDF:
             if self.file is None:
