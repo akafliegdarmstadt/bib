@@ -1,9 +1,11 @@
 {% load static %}
-
+<!doctype html>
+<html lang="de">
 <head>
     <title>{% block title %}Akaflieg Bibliothek{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'biblio/style.css'%}">
+    
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="{% static 'biblio/style.css'%}">
     {% block extrahead %}{% endblock %}
 </head>
 
@@ -29,3 +31,4 @@
 
     </div> 
 </body>
+</html>

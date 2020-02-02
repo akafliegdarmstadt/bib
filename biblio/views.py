@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from .models import BibEntry
 
 
-class IndexView(ListView, LoginRequiredMixin):
+class IndexView(LoginRequiredMixin, ListView):
 
     model = BibEntry
     paginate_by = 5
