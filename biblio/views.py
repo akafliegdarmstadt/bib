@@ -13,22 +13,30 @@ from .models import BibEntry
 class IndexView(LoginRequiredMixin, ListView):
 
     model = BibEntry
-    paginate_by = 5
+    paginate_by = 20
 
     def get_queryset(self):
         search_val = self.request.GET.get('search')
         if search_val:
-            new_context = BibEntry.objects.filter(
+            queryset = BibEntry.objects.filter(
                 title__icontains=search_val
             )
         else:
-            new_context = BibEntry.objects.all()
+            queryset = BibEntry.objects.all()
 
-        return new_context
+        sort_val = self.request.GET.get('sort')
+
+        if sort_val:
+            return queryset.order_by(sort_val)
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search'] = self.request.GET.get('search')
+        sort = self.request.GET.get('sort')
+        if sort:
+            context['sort'] = sort
         return context
 
 @login_required

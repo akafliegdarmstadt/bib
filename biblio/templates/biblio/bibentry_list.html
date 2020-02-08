@@ -1,8 +1,27 @@
 {% extends "biblio/base.html" %}
 
+{% load stable_get %}
 {% load static %}
 
+
 {% block extrahead %}
+
+<script>
+
+function sort(sorting) {
+    hiddeninput = document.getElementById('sort')
+    if (hiddeninput.value == sorting){
+        sorting = '-' + sorting
+    }
+
+    hiddeninput.value = sorting
+
+    theform = document.getElementById('theform')
+    theform.submit()
+}
+
+</script>
+
 {% endblock %}
 
 {% block content %}
@@ -14,12 +33,13 @@
 </div>
 {% else %}
 
-
 <table class="w3-table-all w3-hoverable">
     <tr>
-        <th>Titel</th>
-        <th>Autoren</th>
-        <th>Jahr</th>
+        <th onclick="sort('title')" class="{% select_sort_class "title" %}" >
+        Titel 
+        </th>
+        <th onclick="sort('authors')" class="{% select_sort_class "authors" %}">Autoren</th>
+        <th onclick="sort('year')" class="{% select_sort_class "year" %}">Jahr</th>
         <th>Tags</th>
     </tr>
 
@@ -35,8 +55,8 @@
 <div class="w3-container w3-center">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?{% stable_get page=1 %}">&laquo; first</a>
+            <a href="?{% stable_get page=page_obj.previous_page_number %}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -44,8 +64,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?{% stable_get page=page_obj.next_page_number %}">next</a>
+            <a href="?{% stable_get page=page_obj.paginator.num_pages %}">last &raquo;</a>
         {% endif %}
     </span>
 </div>
