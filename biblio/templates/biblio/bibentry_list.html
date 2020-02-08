@@ -35,11 +35,11 @@ function sort(sorting) {
 
 <table class="w3-table-all w3-hoverable">
     <tr>
-        <th onclick="sort('title')" class="{% select_sort_class "title" %}" >
+        <th onclick="sort('title')" class="sort-link {% select_sort_class "title" %}" >
         Titel 
         </th>
-        <th onclick="sort('authors')" class="{% select_sort_class "authors" %}">Autoren</th>
-        <th onclick="sort('year')" class="{% select_sort_class "year" %}">Jahr</th>
+        <th onclick="sort('authors')" class="sort-link {% select_sort_class "authors" %}">Autoren</th>
+        <th onclick="sort('year')" class="sort-link {% select_sort_class "year" %}">Jahr</th>
         <th>Tags</th>
     </tr>
 

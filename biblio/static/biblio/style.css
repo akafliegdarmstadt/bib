@@ -30,3 +30,8 @@
     content: "↓";
     display: inline-block;
 }
+
+.sort-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
