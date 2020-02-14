@@ -41,3 +41,7 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.tag-link:hover {
+    cursor: pointer;
+}

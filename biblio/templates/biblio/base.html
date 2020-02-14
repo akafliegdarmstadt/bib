@@ -16,6 +16,7 @@
             <form style="margin-top:20px; text-align:right" action="." method="get" accept-charset="utf-8" id="theform">
                 <input class="w3-input" placeholder="Suchen..." type="text" name="search" id="search" value="{{ search|default:"" }}">
                 <input type="hidden" name="sort" id="sort" value="{{ sort|default:"title"}}">
+                <input type="hidden" name="tags" id="tags" value="{{ tags|default:"" }}">
             </form>
         </div>
     </div> 

@@ -17,12 +17,15 @@ class IndexView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         search_val = self.request.GET.get('search')
+        filter_dict = {}
         if search_val:
-            queryset = BibEntry.objects.filter(
-                title__icontains=search_val
-            )
-        else:
-            queryset = BibEntry.objects.all()
+            filter_dict['title__icontains'] = search_val
+        
+        tags_val = self.request.GET.get('tags')
+        if tags_val:
+            filter_dict['tags__name__in'] = tags_val.split(',')
+
+        queryset = BibEntry.objects.filter(**filter_dict).distinct()
 
         sort_val = self.request.GET.get('sort')
 
@@ -34,9 +37,9 @@ class IndexView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search'] = self.request.GET.get('search')
-        sort = self.request.GET.get('sort')
-        if sort:
-            context['sort'] = sort
+        context['sort'] = self.request.GET.get('sort')
+        context['tags'] = self.request.GET.get('tags')
+        context['taglist'] = self.request.GET.get('tags').split(',')
         return context
 
 @login_required

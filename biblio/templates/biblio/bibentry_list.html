@@ -20,6 +20,23 @@ function sort(sorting) {
     theform.submit()
 }
 
+function add_tag(tag) {
+    hiddeninput = document.getElementById('tags')
+    hiddeninput.value += ","+tag
+    theform = document.getElementById('theform')
+    theform.submit()
+}
+
+function remove_tag(tag) {
+    hiddeninput = document.getElementById('tags')
+    tags = hiddeninput.value.split(',')
+    hiddeninput.value = tags.filter(function(value, index, arr){
+        return value!=tag
+    }).join(',')
+
+    theform.submit()
+}
+
 </script>
 
 {% endblock %}
@@ -32,7 +49,6 @@ function sort(sorting) {
     </h3>
 </div>
 {% else %}
-
 <table class="w3-table-all w3-hoverable" style="table-layout: fixed">
     <tr>
         <th onclick="sort('title')" class="sort-link {% select_sort_class "title" %}" style="width: 65%" >
@@ -48,7 +64,15 @@ function sort(sorting) {
             <td><a href="/{{ entry.id }}">{{ entry.title }}</a></td>
             <td>{{ entry.authors.all|join:", " }}</td>
             <td>{{ entry.year }}</td>
-            <td>{{ entry.tags.all|join:", " }}</td>
+            
+            <td>{% for tag in entry.tags.all %}
+                    {% if tag.name in taglist %}
+                        <span onclick="remove_tag('{{tag}}')" class="tag-link w3-tag w3-small w3-round w3-theme-d5">{{tag}}</span>
+                    {% else %}
+                        <span onclick="add_tag('{{tag}}')" class="tag-link w3-tag w3-small w3-round w3-theme-l1">{{tag}}</span>
+                    {% endif %}
+                {% endfor %}
+            </td>
         </tr>
     {% endfor %}
 </table>
