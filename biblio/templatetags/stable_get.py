@@ -19,4 +19,4 @@ def select_sort_class(context, id):
     elif sort=='-'+id:
         return 'sorted'
     
-    return ''
+    return 'unsorted'

@@ -21,6 +21,12 @@
 .w3-hover-text-theme:hover {color:#002e7a !important}
 .w3-hover-border-theme:hover {border-color:#002e7a !important}
 
+.unsorted::after {
+    content: "↓";
+    display: inline-block;
+    color: #ededed;
+}
+
 .sorted::after {
     content: "↑";
     display: inline-block;
