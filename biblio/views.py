@@ -26,7 +26,7 @@ class IndexView(LoginRequiredMixin, ListView):
 
         sort_val = self.request.GET.get('sort')
 
-        if sort_val:
+        if sort_val and sort_val.replace('-','') in ('title', 'year'):
             return queryset.order_by(sort_val)
 
         return queryset

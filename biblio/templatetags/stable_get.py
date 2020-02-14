@@ -15,8 +15,8 @@ def select_sort_class(context, id):
     sort = context['request'].GET.get('sort')
 
     if sort==id:
-        return 'sorted'
-    elif sort=='-'+id:
         return 'sorted-desc'
+    elif sort=='-'+id:
+        return 'sorted'
     
     return ''
