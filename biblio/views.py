@@ -43,7 +43,11 @@ class IndexView(LoginRequiredMixin, ListView):
         context['search'] = self.request.GET.get('search')
         context['sort'] = self.request.GET.get('sort')
         context['tags'] = self.request.GET.get('tags')
-        context['taglist'] = self.request.GET.get('tags').split(',')
+        try:
+            context['taglist'] = self.request.GET.get('tags').split(',')
+        except AttributeError:
+            context['taglist'] = []
+            
         return context
 
 @login_required
