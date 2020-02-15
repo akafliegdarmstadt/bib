@@ -1,11 +1,12 @@
-from django.http import HttpResponse
-from django.template import loader
-from django.shortcuts import get_object_or_404, render
-from django.views import generic
-from django.views.generic.list import ListView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.template import loader
+from django.views import generic
+from django.views.generic.list import ListView
+from django.db.models import Q
 
 from .models import BibEntry
 
@@ -15,17 +16,20 @@ class IndexView(LoginRequiredMixin, ListView):
     model = BibEntry
     paginate_by = 20
 
-    def get_queryset(self):
+    def get_queryset(self):        
+        query_parts = []
+
         search_val = self.request.GET.get('search')
-        filter_dict = {}
         if search_val:
-            filter_dict['title__icontains'] = search_val
+            query_parts.append(
+                Q(title__icontains=search_val) | Q(authors__name__icontains=search_val)
+            )
         
         tags_val = self.request.GET.get('tags')
         if tags_val:
-            filter_dict['tags__name__in'] = tags_val.split(',')
+            query_parts.append(Q(tags__name__in=tags_val.split(',')))
 
-        queryset = BibEntry.objects.filter(**filter_dict).distinct()
+        queryset = BibEntry.objects.filter(*query_parts).distinct()
 
         sort_val = self.request.GET.get('sort')
 
