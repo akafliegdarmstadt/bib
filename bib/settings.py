@@ -25,12 +25,13 @@ if os.path.exists('secrets.json'):
     with open('secrets.json', 'r') as f:
         SECRET_KEY = json.load(f)['DJANGO_SECRET_KEY']
 else:
+    # DEBUG Secret!!
     SECRET_KEY = 'Av9shaeTh1uf7uBubae5iquooWai7iethoXaithoosoob2uungaiyaodain1dua0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bib.akaflieg.tu-darmstadt.de']
+ALLOWED_HOSTS = ['bib.akaflieg.tu-darmstadt.de', '127.0.0.1']
 
 
 # Application definition
